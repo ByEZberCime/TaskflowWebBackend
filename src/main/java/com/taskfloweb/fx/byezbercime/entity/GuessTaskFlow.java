@@ -3,12 +3,17 @@ package com.taskfloweb.fx.byezbercime.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 @Entity
 @Table(name = "taskflow_tasks_base")
 public class GuessTaskFlow {
 
     @Id
+    @Column(name = "taskflow_uniqueid")
+    private UUID taskUniqueid;
+
     @Column(name = "taskflow_id")
     private int taskId;
 

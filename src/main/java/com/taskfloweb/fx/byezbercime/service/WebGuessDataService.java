@@ -49,4 +49,47 @@ public class WebGuessDataService implements WebGuessDataServiceImpl {
         return EntityCatch.handlerBody(dtoGuess, HttpStatus.OK);
     }
 
+    @Override
+    public EntityCatch<List<DtoGuess>> getWebAllTasks() {
+        List<Guess> guesses = guessRepositories.getAllTasks();
+        List<DtoGuess> dtoGuesses = new ArrayList<>();
+
+        if (guesses == null || guesses.isEmpty()) {
+            return EntityCatch.handlerBody(new ArrayList<>(), HttpStatus.NO_CONTENT);
+        }
+
+        for (Guess guess : guesses) {
+
+            DtoGuess dtoGuess = new DtoGuess();
+            BeanUtils.copyProperties(guess, dtoGuess);
+
+            if (guess.getTaskFlowsList() != null && !guess.getTaskFlowsList().isEmpty()) {
+
+                List<DtoGuessTaskFlow> dtoTaskFlowsList = new ArrayList<>();
+
+                for (GuessTaskFlow taskFlows : guess.getTaskFlowsList()) {
+
+                    DtoGuessTaskFlow flow = new DtoGuessTaskFlow();
+                    flow.setTaskName(taskFlows.getTaskName());
+                    flow.setTaskStatus(taskFlows.getTaskStatus());
+
+                    if (!dtoTaskFlowsList.contains(flow)) {
+                        dtoTaskFlowsList.add(flow);
+                    }
+
+                }
+
+                dtoGuess.setTaskFlowsList(dtoTaskFlowsList);
+            } else {
+                dtoGuess.setTaskFlowsList(new ArrayList<>());
+            }
+
+            if (!dtoGuesses.contains(dtoGuess)) {
+                dtoGuesses.add(dtoGuess);
+            }
+
+        }
+
+        return EntityCatch.handlerBody(dtoGuesses, HttpStatus.OK);
+    }
 }
