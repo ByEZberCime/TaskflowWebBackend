@@ -16,7 +16,7 @@ public class WebGuessDataController implements WebGuessDataControllerImpl {
     @Autowired
     private WebGuessDataServiceImpl guessDataService;
 
-    @GetMapping(path = "/data")
+    @GetMapping(path = "/dGs")
     @Override
     public EntityCatch<DtoGuess> getWebByGuessData(@RequestParam(name = "email") String email) {
         return guessDataService.getWebByGuessData(email);
