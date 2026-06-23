@@ -15,7 +15,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Table(name = "taskflow_base_data")
 public class Guess {
 
@@ -41,15 +40,18 @@ public class Guess {
 
     @Column(name = "taskflow_base_birthday",nullable = true)
     @JsonFormat(pattern = "dd.MM.yyyy")
-    private Date birthdayDate;
+    private String birthdayDate;
 
     @Column(name = "taskflow_base_register",nullable = true)
     @JsonFormat(pattern = "dd.MM.yyyy")
-    private Date registerDate;
+    private String registerDate;
 
     @Column(name = "taskflow_base_login",nullable = true)
     @JsonFormat(pattern = "dd.MM.yyyy")
-    private Date loginDate;
+    private String loginDate;
+
+    @Column(name = "taskflow_base_certificatecode")
+    private String certificatedPrimaryOfficialCode;
 
     /*
     * logim result is 0 is false, 1 is true

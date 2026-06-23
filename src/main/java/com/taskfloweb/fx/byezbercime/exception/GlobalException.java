@@ -13,13 +13,13 @@ public class GlobalException  {
 
     protected static <T> EntityCatch<T> createBody(T body, HttpStatus status) {
         EntityBody<T> entityBody = new EntityBody<>();
-        entityBody.setBody(body);
+        entityBody.setComponent(body);
 
         EntityCatch<T> entityCatch = new EntityCatch<>();
         entityCatch.setDateTimestamp(new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date()));
         entityCatch.setAddress(Inet4Address.getLoopbackAddress().getHostAddress());
         entityCatch.setStatusType(status.name() +" " + status.value());
-        entityCatch.setBody(entityBody);
+        entityCatch.setEntiy(entityBody);
 
         return entityCatch;
     }
@@ -29,7 +29,20 @@ public class GlobalException  {
         EntityCatch<T> entityCatch = new EntityCatch<>();
         entityCatch.setErrorMessage(ex.getMessage());
         entityCatch.setException(ex);
-        entityCatch.setBody(new EntityBody<>());
+        entityCatch.setEntiy(new EntityBody<>());
+        entityCatch.setDateTimestamp(new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date()));
+        entityCatch.setAddress(Inet4Address.getLoopbackAddress().getHostAddress());
+        entityCatch.setStatusType(status.name() +" " + status.value());
+
+        return entityCatch;
+    }
+
+    @ExceptionHandler(NullPointerException.class)
+    public static <T> EntityCatch<T> errorCatch(NullPointerException ex,HttpStatus status) {
+        EntityCatch<T> entityCatch = new EntityCatch<>();
+        entityCatch.setErrorMessage(ex.getMessage());
+        entityCatch.setException(ex);
+        entityCatch.setEntiy(new EntityBody<>());
         entityCatch.setDateTimestamp(new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date()));
         entityCatch.setAddress(Inet4Address.getLoopbackAddress().getHostAddress());
         entityCatch.setStatusType(status.name() +" " + status.value());

@@ -7,6 +7,7 @@ import com.taskfloweb.fx.byezbercime.entity.GuessTaskFlow;
 import com.taskfloweb.fx.byezbercime.exception.EntityCatch;
 import com.taskfloweb.fx.byezbercime.exception.GlobalException;
 import com.taskfloweb.fx.byezbercime.repositories.WebGuessRepositories;
+import com.taskfloweb.fx.byezbercime.repositories.WebGuessTaskFlowRepositories;
 import com.taskfloweb.fx.byezbercime.service.implementation.WebGuessDataServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class WebGuessDataService implements WebGuessDataServiceImpl {
 
     @Autowired
     private WebGuessRepositories guessRepositories;
+
+    @Autowired
+    private WebGuessTaskFlowRepositories taskFlowRepositories;
 
     @Override
     public EntityCatch<DtoGuess> getWebByGuessData(String email) {
@@ -47,6 +51,137 @@ public class WebGuessDataService implements WebGuessDataServiceImpl {
 
         dtoGuess.setTaskFlowsList(dtoTaskFlows);
         return EntityCatch.handlerBody(dtoGuess, HttpStatus.OK);
+    }
+
+    @Override
+    public EntityCatch<DtoGuess> saveWebGuessData(Guess guess) {
+        if (!guessRepositories.getAllTasks().contains(guess)) {
+            guessRepositories.save(guess);
+
+            DtoGuess dtoGuess = new DtoGuess();
+            BeanUtils.copyProperties(guess, dtoGuess);
+
+            if (guess.getTaskFlowsList() != null && guess.getTaskFlowsList().isEmpty()) {
+                dtoGuess.setTaskFlowsList(new ArrayList<>());
+            }
+
+            return EntityCatch.handlerBody(dtoGuess, HttpStatus.OK);
+        }
+        return GlobalException.errorCatch(new NullPointerException("Data is not null"),HttpStatus.FOUND);
+    }
+
+    @Override
+    public EntityCatch<DtoGuess> deleteWebGuessData(String email) {
+
+        Guess guessData = guessRepositories.getGuessByData(email);
+        DtoGuess dtoGuess = new DtoGuess();
+        BeanUtils.copyProperties(guessData, dtoGuess);
+        List<DtoGuessTaskFlow> dtoTaskFlows = new ArrayList<>();
+
+        if  (guessData.getTaskFlowsList() != null && !guessData.getTaskFlowsList().isEmpty()) {
+
+            for (GuessTaskFlow flow : guessData.getTaskFlowsList()) {
+
+                DtoGuessTaskFlow dtoFlow = new DtoGuessTaskFlow();
+                dtoFlow.setTaskName(flow.getTaskName());
+                dtoFlow.setTaskStatus(flow.getTaskStatus());
+
+                if (!dtoTaskFlows.contains(dtoFlow)) {
+                    dtoTaskFlows.add(dtoFlow);
+                }
+
+            }
+            dtoGuess.setTaskFlowsList(dtoTaskFlows);
+        } else {
+            dtoGuess.setTaskFlowsList(new  ArrayList<>());
+        }
+
+        guessRepositories.delete(guessData);
+
+        return EntityCatch.handlerBody(dtoGuess, HttpStatus.OK);
+    }
+
+    @Override
+    public EntityCatch<DtoGuessTaskFlow> postWebGuessTaskflowData(String email,GuessTaskFlow guessTaskFlow) {
+
+        if (taskFlowRepositories.getTaskflow(guessTaskFlow.getTaskUniqueid()) != null) {
+            return GlobalException.errorCatch(new NullPointerException("Task already is founded"),HttpStatus.NOT_FOUND);
+        }
+
+        Guess guessData = guessRepositories.getGuessByData(email);
+
+        DtoGuess dtoGuess = new DtoGuess();
+        DtoGuessTaskFlow dtoGuessTaskFlow = new DtoGuessTaskFlow();
+        List<DtoGuessTaskFlow> dtoTaskFlows = new ArrayList<>();
+
+        if (guessData == null) {
+            return GlobalException.errorCatch(new IllegalArgumentException("Data is not found"),HttpStatus.NOT_FOUND);
+        }
+
+        if (!guessData.getTaskFlowsList().contains(guessTaskFlow)) {
+            guessData.getTaskFlowsList().add(guessTaskFlow);
+            guessTaskFlow.setOwner(guessData);
+        } else {
+            return GlobalException.errorCatch(new NullPointerException("Task already is founded"),HttpStatus.NOT_FOUND);
+        }
+
+        BeanUtils.copyProperties(guessData, dtoGuess);
+        BeanUtils.copyProperties(guessTaskFlow, dtoGuessTaskFlow);
+
+        dtoGuessTaskFlow.setTaskName(guessTaskFlow.getTaskName());
+        dtoGuessTaskFlow.setTaskStatus(guessTaskFlow.getTaskStatus());
+
+        if (guessData.getTaskFlowsList() != null && !guessData.getTaskFlowsList().isEmpty()) {
+            for (GuessTaskFlow flow : guessData.getTaskFlowsList()) {
+                DtoGuessTaskFlow dtoFlow = new DtoGuessTaskFlow();
+                dtoFlow.setTaskName(flow.getTaskName());
+                dtoFlow.setTaskStatus(flow.getTaskStatus());
+
+                if (!dtoTaskFlows.contains(dtoFlow)) {
+                    dtoTaskFlows.add(dtoFlow);
+                }
+
+            }
+            dtoGuess.setTaskFlowsList(dtoTaskFlows);
+        } else {
+            dtoGuess.setTaskFlowsList(new  ArrayList<>());
+        }
+
+        guessRepositories.save(guessData);
+        taskFlowRepositories.save(guessTaskFlow);
+
+        return EntityCatch.handlerBody(dtoGuessTaskFlow, HttpStatus.OK);
+    }
+
+    @Override
+    public EntityCatch<DtoGuessTaskFlow> postWebGuessRemoveTaskflowData(String email,int taskflowId) {
+
+        Guess guessData = guessRepositories.getGuessByData(email);
+        String uniqueid = null;
+
+        if (guessData == null) {
+            return GlobalException.errorCatch(new IllegalArgumentException("Data is not found"),HttpStatus.NOT_FOUND);
+        }
+
+        if (guessData.getTaskFlowsList() != null && !guessData.getTaskFlowsList().isEmpty()) {
+            for (GuessTaskFlow flows : guessData.getTaskFlowsList()) {
+                if (flows.getTaskId() == taskflowId) {
+                     uniqueid = flows.getTaskUniqueid();
+                }
+            }
+        }
+
+        GuessTaskFlow taskFlow = taskFlowRepositories.getTaskflow(uniqueid);
+        DtoGuessTaskFlow dtoGuessTaskFlow = new DtoGuessTaskFlow();
+        BeanUtils.copyProperties(taskFlow, dtoGuessTaskFlow);
+
+        if (guessData.getTaskFlowsList().contains(taskFlow))
+            guessData.getTaskFlowsList().remove(taskFlow);
+
+        taskFlowRepositories.delete(taskFlow);
+        guessRepositories.save(guessData);
+
+        return EntityCatch.handlerBody(dtoGuessTaskFlow, HttpStatus.OK);
     }
 
     @Override

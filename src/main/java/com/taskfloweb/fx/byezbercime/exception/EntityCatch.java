@@ -16,7 +16,7 @@ public class EntityCatch<T> {
     private String errorMessage = "nothing";
     private Exception exception;
 
-    private EntityBody<T> body;
+    private EntityBody<T> entiy;
 
     public static <T> EntityCatch<T> handlerBody(T body, HttpStatus status) {
         return GlobalException.createBody(body, status);

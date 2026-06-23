@@ -18,7 +18,7 @@ public class DtoGuess {
 
     private String sourName;
 
-    private Date birthdayDate;
+    private String birthdayDate;
 
     private int loginResult;
 

@@ -12,7 +12,7 @@ public class GuessTaskFlow {
 
     @Id
     @Column(name = "taskflow_uniqueid")
-    private UUID taskUniqueid;
+    private String taskUniqueid;
 
     @Column(name = "taskflow_id")
     private int taskId;

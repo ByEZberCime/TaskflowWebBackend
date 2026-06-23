@@ -9,6 +9,6 @@ import lombok.ToString;
 @ToString
 public class EntityBody<T> {
 
-    private T body;
+    private T component;
 
 }
