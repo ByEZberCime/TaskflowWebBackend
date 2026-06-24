@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "taskflow_tasks_base")
+@Table(name = "table_name")
 public class GuessTaskFlow {
 
     @Id

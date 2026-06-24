@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "taskflow_base_data")
+@Table(name = "table_name")
 public class Guess {
 
     @Id
@@ -51,8 +51,8 @@ public class Guess {
     @JsonFormat(pattern = "dd.MM.yyyy")
     private String loginDate;
 
-    @Column(name = "taskflow_base_certificatecode")
-    private String certificatedPrimaryOfficialCode;
+    @Column(name = "taskflow_base_certificatecode",nullable = false)
+    private String certificatedPrimaryOfficialCode = "user";
 
     /*
     * logim result is 0 is false, 1 is true
