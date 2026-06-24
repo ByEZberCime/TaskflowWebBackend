@@ -15,31 +15,31 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController()
-@RequestMapping(path = "/acc/usrs")
+@RequestMapping(path = "/account/users")
 public class WebGuessDataController implements WebGuessDataControllerImpl {
 
     @Autowired
     private WebGuessDataServiceImpl guessDataService;
 
-    @GetMapping(path = "/gs")
+    @GetMapping(path = "/get")
     @Override
     public EntityCatch<DtoGuess> getWebByGuessData(@RequestParam(name = "email") String email) {
         return guessDataService.getWebByGuessData(email);
     }
 
-    @PostMapping(path = "/pgs")
+    @PostMapping(path = "/put")
     @Override
     public EntityCatch<DtoGuess> saveWebGuessData(@RequestBody() Guess guess) {
         return guessDataService.saveWebGuessData(guess);
     }
 
-    @GetMapping(path = "/gstf")
+    @GetMapping(path = "/tasklistsize")
     @Override
     public EntityCatch<Integer> getGuessTaskFlowLists(@RequestParam(name = "email") String email) {
         return guessDataService.getGuessTaskFlowLists(email);
     }
 
-    @PutMapping(path = "/ptds")
+    @PutMapping(path = "/addtask")
     @Override
     public EntityCatch<DtoGuessTaskFlow> postWebGuessAddTaskflowData(@RequestParam(name = "email") String email, @RequestBody GuessTaskFlow guessTaskFlow) {
         try {
@@ -49,13 +49,13 @@ public class WebGuessDataController implements WebGuessDataControllerImpl {
         }
     }
 
-    @DeleteMapping(path = "/rtds")
+    @DeleteMapping(path = "/removetask")
     @Override
     public EntityCatch<DtoGuessTaskFlow> postWebGuessRemoveTaskflowData(@RequestParam(name = "email") String email,@RequestParam(name = "taskId") int taskflowId) {
         return guessDataService.postWebGuessRemoveTaskflowData(email,taskflowId);
     }
 
-    @DeleteMapping(path = "/dgs")
+    @DeleteMapping(path = "/delete")
     @Override
     public EntityCatch<DtoGuess> deleteWebGuessData(@RequestParam(name = "email") String email) {
         try {
@@ -65,7 +65,7 @@ public class WebGuessDataController implements WebGuessDataControllerImpl {
         }
     }
 
-    @GetMapping(path = "/lgt")
+    @GetMapping(path = "/listguess")
     @Override
     public EntityCatch<List<DtoGuess>> getWebAllTasks() {
         return guessDataService.getWebAllTasks();
