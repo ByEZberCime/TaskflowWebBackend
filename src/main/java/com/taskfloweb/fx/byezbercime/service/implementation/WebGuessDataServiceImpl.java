@@ -17,7 +17,9 @@ public interface WebGuessDataServiceImpl {
 
     EntityCatch<DtoGuess> deleteWebGuessData(String email);
 
-    EntityCatch<DtoGuessTaskFlow> postWebGuessTaskflowData(String email, GuessTaskFlow guessTaskFlow);
+    EntityCatch<Integer> getGuessTaskFlowLists(String email);
+
+    EntityCatch<DtoGuessTaskFlow> postWebGuessAddTaskflowData(String email, GuessTaskFlow guessTaskFlow);
 
     EntityCatch<DtoGuessTaskFlow> postWebGuessRemoveTaskflowData(String email,int taskflowId);
 

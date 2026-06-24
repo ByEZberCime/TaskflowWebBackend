@@ -33,11 +33,17 @@ public class WebGuessDataController implements WebGuessDataControllerImpl {
         return guessDataService.saveWebGuessData(guess);
     }
 
+    @GetMapping(path = "/gstf")
+    @Override
+    public EntityCatch<Integer> getGuessTaskFlowLists(@RequestParam(name = "email") String email) {
+        return guessDataService.getGuessTaskFlowLists(email);
+    }
+
     @PutMapping(path = "/ptds")
     @Override
-    public EntityCatch<DtoGuessTaskFlow> postWebGuessTaskflowData(@RequestParam(name = "email") String email, @RequestBody GuessTaskFlow guessTaskFlow) {
+    public EntityCatch<DtoGuessTaskFlow> postWebGuessAddTaskflowData(@RequestParam(name = "email") String email, @RequestBody GuessTaskFlow guessTaskFlow) {
         try {
-            return guessDataService.postWebGuessTaskflowData(email,guessTaskFlow);
+            return guessDataService.postWebGuessAddTaskflowData(email,guessTaskFlow);
         } catch (IllegalArgumentException exception) {
             return GlobalException.errorCatch(exception, HttpStatus.BAD_REQUEST);
         }

@@ -53,6 +53,18 @@ public class WebGuessDataService implements WebGuessDataServiceImpl {
         return EntityCatch.handlerBody(dtoGuess, HttpStatus.OK);
     }
 
+
+    @Override
+    public EntityCatch<Integer> getGuessTaskFlowLists(String email) {
+
+        Guess guessData = guessRepositories.getGuessByData(email);
+        if (guessData == null) {
+            return GlobalException.errorCatch(new IllegalArgumentException("Data is not found"),HttpStatus.NOT_FOUND);
+        }
+
+        return EntityCatch.handlerBody(guessData.getTaskFlowsList().size(), HttpStatus.OK);
+    }
+
     @Override
     public EntityCatch<DtoGuess> saveWebGuessData(Guess guess) {
         if (!guessRepositories.getAllTasks().contains(guess)) {
@@ -82,6 +94,8 @@ public class WebGuessDataService implements WebGuessDataServiceImpl {
 
             for (GuessTaskFlow flow : guessData.getTaskFlowsList()) {
 
+                taskFlowRepositories.delete(flow);
+
                 DtoGuessTaskFlow dtoFlow = new DtoGuessTaskFlow();
                 dtoFlow.setTaskName(flow.getTaskName());
                 dtoFlow.setTaskStatus(flow.getTaskStatus());
@@ -102,7 +116,7 @@ public class WebGuessDataService implements WebGuessDataServiceImpl {
     }
 
     @Override
-    public EntityCatch<DtoGuessTaskFlow> postWebGuessTaskflowData(String email,GuessTaskFlow guessTaskFlow) {
+    public EntityCatch<DtoGuessTaskFlow> postWebGuessAddTaskflowData(String email,GuessTaskFlow guessTaskFlow) {
 
         if (taskFlowRepositories.getTaskflow(guessTaskFlow.getTaskUniqueid()) != null) {
             return GlobalException.errorCatch(new NullPointerException("Task already is founded"),HttpStatus.NOT_FOUND);
