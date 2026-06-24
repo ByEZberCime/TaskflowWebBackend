@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@ToString
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

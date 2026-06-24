@@ -5,12 +5,11 @@ import com.taskfloweb.fx.byezbercime.entity.PrimaryOfficial;
 import com.taskfloweb.fx.byezbercime.exception.EntityCatch;
 import com.taskfloweb.fx.byezbercime.service.implementation.WebAdminDataServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@PreAuthorize("hasRole('admin')")
 @RequestMapping(path = "/admin/certificate")
 public class WebAdminDataController implements WebAdminDataControllerImpl {
 
@@ -23,6 +22,12 @@ public class WebAdminDataController implements WebAdminDataControllerImpl {
     @Override
     public EntityCatch<PrimaryOfficial> createOfficialCertifica(@RequestBody PrimaryOfficial primaryOfficial) {
         return adminDataService.createOfficialCertifica(primaryOfficial);
+    }
+
+    @GetMapping(path = "/search")
+    @Override
+    public EntityCatch<PrimaryOfficial> getByOfficialCertifica(@RequestParam(name = "certificate") String certificate) {
+        return adminDataService.getByOfficialCertifica(certificate);
     }
 
 }

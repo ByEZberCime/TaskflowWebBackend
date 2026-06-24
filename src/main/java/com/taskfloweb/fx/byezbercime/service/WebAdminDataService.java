@@ -1,5 +1,7 @@
 package com.taskfloweb.fx.byezbercime.service;
 
+import com.taskfloweb.fx.byezbercime.configuration.WebConfiguration;
+import com.taskfloweb.fx.byezbercime.entity.Guess;
 import com.taskfloweb.fx.byezbercime.entity.PrimaryOfficial;
 import com.taskfloweb.fx.byezbercime.exception.EntityCatch;
 import com.taskfloweb.fx.byezbercime.exception.GlobalException;
@@ -15,6 +17,9 @@ public class WebAdminDataService implements WebAdminDataServiceImpl {
     @Autowired
     private WebAdminRepositories adminRepositories;
 
+    @Autowired
+    private WebConfiguration webConfiguration;
+
     @Override
     public EntityCatch<PrimaryOfficial> createOfficialCertifica(PrimaryOfficial primaryOfficial) {
 
@@ -24,6 +29,16 @@ public class WebAdminDataService implements WebAdminDataServiceImpl {
             adminRepositories.save(primaryOfficial);
         }
         return EntityCatch.handlerBody(primaryOfficial,HttpStatus.CREATED);
+    }
+
+    @Override
+    public EntityCatch<PrimaryOfficial> getByOfficialCertifica(String certificate) {
+
+        if (adminRepositories.getOfficialByCertificatedCode(certificate) != null) {
+            PrimaryOfficial primaryOfficial = adminRepositories.getOfficialByCertificatedCode(certificate);
+            return EntityCatch.handlerBody(primaryOfficial,HttpStatus.OK);
+        }
+        return GlobalException.errorCatch(new NullPointerException("Official is founded"), HttpStatus.NOT_FOUND);
     }
 
 }
