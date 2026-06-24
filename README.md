@@ -3,7 +3,7 @@ The Taskflow backend rest api information.
 <p><italic>The guess data is call</italic></p>
 <code>http://localhost:8080/account/users/get?email={email}</code>
 
-_<br>
+________________________________________________________<br>
 <br>
 
 <basefont>On data the DTO schema</basefont>
@@ -13,14 +13,14 @@ _<br>
 </code>
 
 <br>
-<br>_
+<br>________________________________________________________
 <br>
 <br>
 
 <p><italic>The all guess lists</italic></p>
 <code>http://localhost:8080/account/users/listguess</code>
 
-_<br>
+________________________________________________________<br>
 <br>
 
 <basefont>On list the DTO schema</basefont>
@@ -30,14 +30,14 @@ _<br>
 </code>
 
 <br>
-<br>_
+<br>________________________________________________________
 <br>
 <br>
 
 <p><italic>The add to new guess data</italic></p>
 <code>http://localhost:8080/account/users/put</code>
 
-_<br>
+________________________________________________________<br>
 <br>
 
 <basefont>On json data script</basefont>
@@ -47,9 +47,9 @@ _<br>
 </code>
 
 <br>
-<br>_
+<br>________________________________________________________
 
-_<br>
+________________________________________________________<br>
 <br>
 
 <basefont>On data the DTO schema</basefont>
@@ -59,7 +59,7 @@ _<br>
 </code>
 
 <br>
-<br>_
+<br>________________________________________________________
 <br>
 <br>
 
@@ -76,9 +76,9 @@ _<br>
 </code>
 
 <br>
-<br>_
+<br>________________________________________________________
 
-_<br>
+________________________________________________________<br>
 <br>
 
 <basefont>On task the DTO schema</basefont>
@@ -88,7 +88,7 @@ _<br>
 </code>
 
 <br>
-<br>_
+<br>________________________________________________________
 <br>
 <br>
 
@@ -96,11 +96,13 @@ _<br>
 <code>http://localhost:8080/account/users/removetask?email={email}?taskId={taskId}</code>
 
 <br>
-<br>_
+<br>________________________________________________________
 <br>
 <br>
 
 <p><italic>The delete on guess data</italic></p>
 <code>http://localhost:8080/account/users/delete?email={email}</code>
 
+<br>
+<br>________________________________________________________
 <br>
