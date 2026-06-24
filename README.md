@@ -17,6 +17,23 @@ ________________________________________________________<br>
 <br>
 <br>
 
+<p><italic>The guess tasks list</italic></p>
+<code>http://localhost:8080/account/users/tasklistsize</code>
+
+________________________________________________________<br>
+<br>
+
+<basefont>On tasks size the DTO schema</basefont>
+<br>
+<code>
+
+</code>
+
+<br>
+<br>________________________________________________________
+<br>
+<br>
+
 <p><italic>The all guess lists</italic></p>
 <code>http://localhost:8080/account/users/listguess</code>
 
