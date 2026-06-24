@@ -26,7 +26,7 @@ ________________________________________________________<br>
 <basefont>On tasks size the DTO schema</basefont>
 <br>
 <code>
-
+<img width="381" height="211" alt="image" src="https://github.com/user-attachments/assets/3d36f785-e923-4769-b4e9-de069525c7fc" />
 </code>
 
 <br>
