@@ -1,15 +1,9 @@
 The Taskflow backend rest api information.
 
 <br>
-<br>
-<br>
 
-<code>  
-  The coming soon i make to repost on project
-</code>
+<code>The coming soon i make to repost on project</code>
 
-<br>
-<br>
 <br>
 
 <p><italic>The guess data is call</italic></p>
