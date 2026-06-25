@@ -1,7 +1,4 @@
 The Taskflow backend rest api information.
-
-<br>
-
 <code>The coming soon i make to repost on project</code>
 
 <br>
