@@ -2,17 +2,14 @@ package com.taskfloweb.fx.byezbercime.controller.implementation;
 
 import com.taskfloweb.fx.byezbercime.dto.DtoGuess;
 import com.taskfloweb.fx.byezbercime.dto.DtoGuessTaskFlow;
-import com.taskfloweb.fx.byezbercime.entity.Guess;
 import com.taskfloweb.fx.byezbercime.entity.GuessTaskFlow;
 import com.taskfloweb.fx.byezbercime.exception.EntityCatch;
 
 import java.util.List;
 
-public interface WebGuessDataControllerImpl {
+public interface WebOfficialControllerImpl {
 
     EntityCatch<DtoGuess> getWebByGuessData(String email);
-
-    EntityCatch<DtoGuess> saveWebGuessData(Guess guess);
 
     EntityCatch<DtoGuess> deleteWebGuessData(String email);
 

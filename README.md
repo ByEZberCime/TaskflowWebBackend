@@ -1,7 +1,7 @@
 The Taskflow backend rest api information.
 
 <p><italic>The guess data is call</italic></p>
-<code>http://localhost:8080/account/users/get?email={email}</code>
+<code>http://localhost:8080/official/users/get?email={email}</code>
 
 ________________________________________________________<br>
 <br>
@@ -17,25 +17,36 @@ ________________________________________________________<br>
 <br>
 <br>
 
-<p><italic>The guess tasks list</italic></p>
-<code>http://localhost:8080/account/users/tasklistsize</code>
+[//]: # (<p><italic>The guess tasks list</italic></p>)
 
-________________________________________________________<br>
-<br>
+[//]: # (<code>http://localhost:8080/official/users/tasklistsize</code>)
 
-<basefont>On tasks size the DTO schema</basefont>
-<br>
-<code>
+[//]: # ()
+[//]: # (________________________________________________________<br>)
 
-</code>
+[//]: # (<br>)
 
-<br>
-<br>________________________________________________________
-<br>
-<br>
+[//]: # ()
+[//]: # (<basefont>On tasks size the DTO schema</basefont>)
+
+[//]: # (<br>)
+
+[//]: # (<code>)
+
+[//]: # ()
+[//]: # (</code>)
+
+[//]: # ()
+[//]: # (<br>)
+
+[//]: # (<br>________________________________________________________)
+
+[//]: # (<br>)
+
+[//]: # (<br>)
 
 <p><italic>The all guess lists</italic></p>
-<code>http://localhost:8080/account/users/listguess</code>
+<code>http://localhost:8080/official/users/listguess</code>
 
 ________________________________________________________<br>
 <br>
@@ -52,7 +63,7 @@ ________________________________________________________<br>
 <br>
 
 <p><italic>The add to new guess data</italic></p>
-<code>http://localhost:8080/account/users/put</code>
+<code>http://localhost:8080/official/users/put</code>
 
 ________________________________________________________<br>
 <br>
@@ -81,7 +92,7 @@ ________________________________________________________<br>
 <br>
 
 <p><italic>The add to guess on new task</italic></p>
-<code>http://localhost:8080/account/users/addtask?email={email}</code>
+<code>http://localhost:8080/official/users/addtask?email={email}</code>
 
 _<br>
 <br>
@@ -110,7 +121,7 @@ ________________________________________________________<br>
 <br>
 
 <p><italic>The delete on guess task</italic></p>
-<code>http://localhost:8080/account/users/removetask?email={email}?taskId={taskId}</code>
+<code>http://localhost:8080/official/users/removetask?email={email}?taskId={taskId}</code>
 
 <br>
 <br>________________________________________________________
@@ -118,7 +129,21 @@ ________________________________________________________<br>
 <br>
 
 <p><italic>The delete on guess data</italic></p>
-<code>http://localhost:8080/account/users/delete?email={email}</code>
+<code>http://localhost:8080/official/users/delete?email={email}</code>
+
+<br>
+<br>________________________________________________________
+<br>
+
+<p><italic>The users service is register</italic></p>
+<code>http://localhost:8080/register <br> Cooming Soon!</code>
+
+<br>
+<br>________________________________________________________
+<br>
+
+<p><italic>The users service is login</italic></p>
+<code>http://localhost:8080/login <br> Cooming Soon!</code>
 
 <br>
 <br>________________________________________________________

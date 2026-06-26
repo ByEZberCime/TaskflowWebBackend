@@ -1,13 +1,12 @@
 package com.taskfloweb.fx.byezbercime.controller;
 
-import com.taskfloweb.fx.byezbercime.controller.implementation.WebGuessDataControllerImpl;
+import com.taskfloweb.fx.byezbercime.controller.implementation.WebOfficialControllerImpl;
 import com.taskfloweb.fx.byezbercime.dto.DtoGuess;
 import com.taskfloweb.fx.byezbercime.dto.DtoGuessTaskFlow;
-import com.taskfloweb.fx.byezbercime.entity.Guess;
 import com.taskfloweb.fx.byezbercime.entity.GuessTaskFlow;
 import com.taskfloweb.fx.byezbercime.exception.EntityCatch;
 import com.taskfloweb.fx.byezbercime.exception.GlobalException;
-import com.taskfloweb.fx.byezbercime.service.implementation.WebGuessDataServiceImpl;
+import com.taskfloweb.fx.byezbercime.service.implementation.WebOfficialServiceImpl;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,22 +14,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController()
-@RequestMapping(path = "/account/users")
-public class WebGuessDataController implements WebGuessDataControllerImpl {
+@RequestMapping(path = "/official/users")
+public class WebAdminController implements WebOfficialControllerImpl {
 
     @Autowired
-    private WebGuessDataServiceImpl guessDataService;
+    private WebOfficialServiceImpl guessDataService;
 
     @GetMapping(path = "/get")
     @Override
     public EntityCatch<DtoGuess> getWebByGuessData(@RequestParam(name = "email") String email) {
         return guessDataService.getWebByGuessData(email);
-    }
-
-    @PostMapping(path = "/put")
-    @Override
-    public EntityCatch<DtoGuess> saveWebGuessData(@RequestBody() Guess guess) {
-        return guessDataService.saveWebGuessData(guess);
     }
 
     @GetMapping(path = "/tasklistsize")

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface WebGuessTaskFlowRepositories extends JpaRepository<GuessTaskFlow, UUID> {
+public interface WebTaskflowRepositories extends JpaRepository<GuessTaskFlow, UUID> {
 
     @Query(nativeQuery = true,value = "SELECT * FROM taskflow_tasks_base WHERE taskflow_uniqueid=?1")
     GuessTaskFlow getTaskflow(String uniqueid);

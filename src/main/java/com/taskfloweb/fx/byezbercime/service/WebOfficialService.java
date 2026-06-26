@@ -7,8 +7,8 @@ import com.taskfloweb.fx.byezbercime.entity.GuessTaskFlow;
 import com.taskfloweb.fx.byezbercime.exception.EntityCatch;
 import com.taskfloweb.fx.byezbercime.exception.GlobalException;
 import com.taskfloweb.fx.byezbercime.repositories.WebGuessRepositories;
-import com.taskfloweb.fx.byezbercime.repositories.WebGuessTaskFlowRepositories;
-import com.taskfloweb.fx.byezbercime.service.implementation.WebGuessDataServiceImpl;
+import com.taskfloweb.fx.byezbercime.repositories.WebTaskflowRepositories;
+import com.taskfloweb.fx.byezbercime.service.implementation.WebOfficialServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,13 +18,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class WebGuessDataService implements WebGuessDataServiceImpl {
+public class WebOfficialService implements WebOfficialServiceImpl {
 
     @Autowired
     private WebGuessRepositories guessRepositories;
 
     @Autowired
-    private WebGuessTaskFlowRepositories taskFlowRepositories;
+    private WebTaskflowRepositories taskFlowRepositories;
 
     @Override
     public EntityCatch<DtoGuess> getWebByGuessData(String email) {
@@ -63,23 +63,6 @@ public class WebGuessDataService implements WebGuessDataServiceImpl {
         }
 
         return EntityCatch.handlerBody(guessData.getTaskFlowsList().size(), HttpStatus.OK);
-    }
-
-    @Override
-    public EntityCatch<DtoGuess> saveWebGuessData(Guess guess) {
-        if (!guessRepositories.getAllTasks().contains(guess)) {
-            guessRepositories.save(guess);
-
-            DtoGuess dtoGuess = new DtoGuess();
-            BeanUtils.copyProperties(guess, dtoGuess);
-
-            if (guess.getTaskFlowsList() != null && guess.getTaskFlowsList().isEmpty()) {
-                dtoGuess.setTaskFlowsList(new ArrayList<>());
-            }
-
-            return EntityCatch.handlerBody(dtoGuess, HttpStatus.OK);
-        }
-        return GlobalException.errorCatch(new NullPointerException("Data is not null"),HttpStatus.FOUND);
     }
 
     @Override

@@ -16,30 +16,30 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "table_name")
+@Table(name = "taskflow_base_data")
 public class Guess {
 
     @Id
-    @Column(name = "email")
+    @Column(name = "email",nullable = false)
     private String email;
 
-    @Column(name = "taskflow_base_username",nullable = true)
+    @Column(name = "taskflow_base_username",nullable = false)
     private String username;
 
-    @Column(name = "taskflow_base_password",nullable = true)
+    @Column(name = "taskflow_base_password",nullable = false)
     private String password;
 
-    @Column(name = "taskflow_base_confirmpassword",nullable = true)
+    @Column(name = "taskflow_base_confirmpassword",nullable = false)
     private String confirmPassword;
 
 
-    @Column(name = "taskflow_base_firstname",nullable = true)
+    @Column(name = "taskflow_base_firstname",nullable = false)
     private String firstName;
 
-    @Column(name = "taskflow_base_sourname",nullable = true)
+    @Column(name = "taskflow_base_sourname",nullable = false)
     private String sourName;
 
-    @Column(name = "taskflow_base_birthday",nullable = true)
+    @Column(name = "taskflow_base_birthday",nullable = false)
     @JsonFormat(pattern = "dd.MM.yyyy")
     private String birthdayDate;
 
@@ -51,8 +51,7 @@ public class Guess {
     @JsonFormat(pattern = "dd.MM.yyyy")
     private String loginDate;
 
-    @Column(name = "taskflow_base_certificatecode",nullable = false)
-    private String certificatedPrimaryOfficialCode = "user";
+    private String certificatedPrimaryOfficialCode;
 
     /*
     * logim result is 0 is false, 1 is true
