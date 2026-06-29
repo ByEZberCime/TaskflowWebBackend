@@ -2,10 +2,7 @@ package com.taskfloweb.fx.byezbercime.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,9 +23,13 @@ public class Guess {
     @Column(name = "taskflow_base_username",nullable = false)
     private String username;
 
+    @Setter(AccessLevel.NONE)
+    @Getter(AccessLevel.NONE)
     @Column(name = "taskflow_base_password",nullable = false)
     private String password;
 
+    @Setter(AccessLevel.NONE)
+    @Getter(AccessLevel.NONE)
     @Column(name = "taskflow_base_confirmpassword",nullable = false)
     private String confirmPassword;
 
@@ -51,6 +52,7 @@ public class Guess {
     @JsonFormat(pattern = "dd.MM.yyyy")
     private String loginDate;
 
+    @Column(name = "taskflow_base_certificate",nullable = true)
     private String certificatedPrimaryOfficialCode;
 
     /*
