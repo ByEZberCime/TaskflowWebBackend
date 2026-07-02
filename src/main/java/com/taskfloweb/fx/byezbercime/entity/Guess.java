@@ -23,12 +23,10 @@ public class Guess {
     @Column(name = "taskflow_base_username",nullable = false)
     private String username;
 
-    @Setter(AccessLevel.NONE)
     @Getter(AccessLevel.NONE)
     @Column(name = "taskflow_base_password",nullable = false)
     private String password;
 
-    @Setter(AccessLevel.NONE)
     @Getter(AccessLevel.NONE)
     @Column(name = "taskflow_base_confirmpassword",nullable = false)
     private String confirmPassword;
