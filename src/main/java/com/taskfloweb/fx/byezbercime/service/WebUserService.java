@@ -25,6 +25,9 @@ public class WebUserService implements WebUserServiceImpl {
     @Autowired
     private WebGuessRepositories guessRepositories;
 
+    @Autowired
+    private JWTService jwtService;
+
     @Override
     public EntityCatch<DtoGuess> verifyRegister(@NonNull DtoGuessService dtoGuessService) {
 
@@ -54,7 +57,7 @@ public class WebUserService implements WebUserServiceImpl {
 
         }
 
-            return EntityCatch.handlerBody(dtoGuess,HttpStatus.OK);
+        return EntityCatch.handlerBody(dtoGuess,HttpStatus.OK);
     }
 
     public boolean isUsernameExists(String tag,String username) {
